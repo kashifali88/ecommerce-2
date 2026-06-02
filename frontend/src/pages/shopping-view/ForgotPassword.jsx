@@ -11,6 +11,7 @@ function ForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
     if (!email.trim()) {
       toast.error("Please enter your email");
@@ -19,7 +20,7 @@ function ForgotPassword() {
     try {
       setLoading(true);
 
-      const res = await fetch("/api/auth/forgot-password", {
+      const res = await fetch(`${API}/auth/forgot-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

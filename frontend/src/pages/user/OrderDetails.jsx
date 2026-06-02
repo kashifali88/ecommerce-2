@@ -6,6 +6,8 @@ function OrderDetails() {
   const { id } = useParams();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(false);
+      const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
 
   useEffect(() => {
     fetchOrder();
@@ -15,7 +17,7 @@ function OrderDetails() {
     try {
       setLoading(true);
 
-      const res = await fetch(`/api/orders/order/${id}`, {
+      const res = await fetch(`${API}/orders/order/${id}`, {
         credentials: "include",
       });
 

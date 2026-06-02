@@ -8,6 +8,8 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
 function OAuth() {
+      const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const handleSubmit = async (e) => {
@@ -18,7 +20,7 @@ function OAuth() {
     const user = result.user;
     try {
       dispatch(signInStart())
-      const res = await fetch("/api/auth/google", {
+      const res = await fetch(`${API}/auth/google`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

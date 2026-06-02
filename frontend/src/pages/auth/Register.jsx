@@ -10,6 +10,8 @@ function Register() {
     "email": "",
     "password": ""
   })
+      const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate();
@@ -26,7 +28,7 @@ function Register() {
         toast.error('Please fill all required fields')
         return;
       }
-      const res = await fetch("/api/auth/register",{
+      const res = await fetch(`${API}/auth/register`,{
         method: "POST",
         headers: {
           "Content-Type": "application/json"

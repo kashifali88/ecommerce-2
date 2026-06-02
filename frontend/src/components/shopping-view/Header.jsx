@@ -17,6 +17,8 @@ function Header() {
   const [searchTerm ,setSearchTerm] = useState("")
   const navigate = useNavigate();
 const dispatch = useDispatch();
+    const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
 const handleNavigate = (getCurrentMenuItem) => {
   sessionStorage.removeItem('filters')
   const currentFilter = getCurrentMenuItem.id !== '/' ? {
@@ -40,7 +42,7 @@ const handleNavigate = (getCurrentMenuItem) => {
   const handleLogout = async() => {
 try {
   dispatch(signOutStart())
-  const res = await fetch("/api/auth/signout", {
+  const res = await fetch(`${API}/auth/signout`, {
     method: "POST",
     credentials: "include"
   })
@@ -67,7 +69,7 @@ const handleSearchProduct = async (searchTerm) => {
     }
       sessionStorage.removeItem("filters");
 
-    const res = await fetch(`/api/products/search?keyword=${searchTerm}`)
+    const res = await fetch(`${API}/products/search?keyword=${searchTerm}`)
     const data = await res.json();
     if (!res.ok || data.success === false){
       toast.error(data.error);

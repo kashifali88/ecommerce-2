@@ -12,6 +12,8 @@ import {
 } from "../../redux/slice/authSlice";
 
 function Login() {
+      const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
 
   const [formData, setFormdata] = useState({
     login: "",
@@ -40,7 +42,7 @@ function Login() {
         : { username: formData.login, password: formData.password };
 
       dispatch(signInStart());
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch(`${API}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

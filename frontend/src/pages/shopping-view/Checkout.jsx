@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 function Checkout() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+    const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
   const { items } = useSelector((state) => state.cart);
   const navigate = useNavigate();
@@ -115,7 +116,7 @@ function Checkout() {
 
       // CARD PAYMENT
       if (formData.paymentMethod === "card") {
-        const res = await fetch("/api/orders/create-checkout-session", {
+        const res = await fetch(`${API}/orders/create-checkout-session`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
@@ -136,7 +137,7 @@ function Checkout() {
       }
 
       // COD ORDER
-      const res = await fetch("/api/orders/create", {
+      const res = await fetch(`${API}/orders/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

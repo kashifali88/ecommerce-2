@@ -6,10 +6,11 @@ import { useNavigate } from 'react-router-dom'
 
 function AdminHeader({setOpen}) {
     const navigate = useNavigate();
+    const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 const handleLogOut = async () => {
   try {
-    const res = await fetch("/api/auth/signout", {
+    const res = await fetch(`${API}/auth/signout`, {
       method: "POST",
       credentials: "include",
     });

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 function ResetPassword() {
   const { token } = useParams();
   const navigate = useNavigate();
+    const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -25,7 +26,7 @@ function ResetPassword() {
       setLoading(true);
 
       const res = await fetch(
-        `/api/auth/reset-password/${token}`,
+        `${API}/auth/reset-password/${token}`,
         {
           method: "POST",
           headers: {

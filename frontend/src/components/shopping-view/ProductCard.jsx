@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 function ProductCard({ product }) {
+      const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
   const { currentUser } = useSelector((state) => state.auth)
   const dispatch = useDispatch();
     const handleAddToCart =async () => {
       try {
     dispatch(addToCartStart());
-    const res = await fetch("/api/cart/add", {
+    const res = await fetch(`${API}/cart/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

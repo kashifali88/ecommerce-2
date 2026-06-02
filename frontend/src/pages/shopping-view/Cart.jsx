@@ -9,6 +9,8 @@ import { toast } from "react-toastify";
 function Cart() {
   const [cart, setCart] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
+      const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
 
   const { currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -17,7 +19,7 @@ function Cart() {
   // FETCH CART
   const handleFetchCart = async () => {
     try {
-      const res = await fetch(`/api/cart/${currentUser?._id}`, {
+      const res = await fetch(`${API}/cart/${currentUser?._id}`, {
         method: "GET",
         credentials: "include",
       });
@@ -37,7 +39,7 @@ function Cart() {
   const handleRemove = async (productId) => {
     try {
       const res = await fetch(
-        `/api/cart/remove/${currentUser._id}/${productId}`,
+        `${API}/cart/remove/${currentUser._id}/${productId}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -60,7 +62,7 @@ function Cart() {
   // INCREASE QUANTITY
   const handleIncrease = async (item) => {
     try {
-      const res = await fetch(`/api/cart/update/${item.productId._id}`, {
+      const res = await fetch(`${API}/cart/update/${item.productId._id}`, {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -88,7 +90,7 @@ function Cart() {
     if (item.quantity <= 1) return;
 
     try {
-      const res = await fetch(`/api/cart/update/${item.productId._id}`, {
+      const res = await fetch(`${API}/cart/update/${item.productId._id}`, {
         method: "PUT",
         credentials: "include",
         headers: { "Content-Type": "application/json" },

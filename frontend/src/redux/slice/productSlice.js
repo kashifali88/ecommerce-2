@@ -4,12 +4,14 @@ const initialState = {
   loading: false,
   productList: [],
 };
+    const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
 
 export const addNewProduct = createAsyncThunk(
   "/products/addNewProduct",
   async (formData, thunkAPI) => {
     try {
-      const res = await fetch("/api/products/create-product", {
+      const res = await fetch(`${API}/products/create-product`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -46,7 +48,10 @@ export const fetchFilterProducts = createAsyncThunk(
       }
 
       const res = await fetch(
-        `http://localhost:5000/api/products/search?${params.toString()}`
+        `${API}/products/search?${params.toString()}`,
+        {
+          credentials: "include",
+        }
       );
 
       const data = await res.json();
@@ -67,7 +72,9 @@ export const fetchAllProducts = createAsyncThunk(
   "/products/fetchAllProducts",
   async (_, thunkAPI) => {
     try {
-      const res = await fetch("http://localhost:5000/api/products");
+      const res = await fetch(`${API}/products`, {
+        credentials: "include",
+      });
       const data = await res.json();
       if (!res.ok || data.success === false) {
         throw new Error(data.message);
@@ -83,7 +90,7 @@ export const updateProduct = createAsyncThunk(
   "/products/updateProduct",
   async ({ id, formData, thunkAPI }) => {
     try {
-      const res = await fetch(`/api/products/${id}`, {
+      const res = await fetch(`${API}/products/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -106,8 +113,9 @@ export const deleteProduct = createAsyncThunk(
   "/products/deleteProduct",
   async (id, thunkAPI) => {
     try {
-      const res = await fetch(`/api/products/${id}`, {
+      const res = await fetch(`${API}/products/${id}`, {
         method: "DELETE",
+        credentials: "include",
       });
       const data = await res.json();
       if (!res.ok || data.success === false) {

@@ -5,6 +5,8 @@ import { FiX } from "react-icons/fi";
 
 function ProductImageUpload({imageUploadLoading, setImageUploadLoading, file, setFile, formData, setFormData}) {
     const ref = useRef(null);
+        const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
 
     const handleImageFileChange = (e) =>{
 
@@ -17,7 +19,7 @@ const uploadImageToCloudinary = async () => {
     data.append("my_file", file)
     try {
         setImageUploadLoading(true)
-        const res = await fetch("/api/products/upload-image", {
+        const res = await fetch(`${API}/products/upload-image`, {
             method: "POST",
             body: data
         })

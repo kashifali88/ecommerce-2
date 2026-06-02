@@ -11,11 +11,13 @@ function SingleProduct() {
   const [loading, setLoading] = useState(true);
   const {currentUser} = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+      const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/products/${id}`);
+        const res = await fetch(`${API}/products/${id}`);
         const data = await res.json();
 
         if (data.success) {
@@ -35,7 +37,7 @@ function SingleProduct() {
 
       try {
         dispatch(addToCartStart());
-        const res = await fetch("/api/cart/add", {
+        const res = await fetch(`${API}/cart/add`, {
           method: "POST",
           headers: {
             "content-Type": "application/json"

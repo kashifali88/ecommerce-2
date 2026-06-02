@@ -20,6 +20,7 @@ function Account() {
   const fileRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 // To render user data on page load
   useEffect(() => {
@@ -84,7 +85,7 @@ function Account() {
       if (file) {
         profileImage = await uploadImage();
       }
-      const res = await fetch(`/api/user/${currentUser?._id}`, {
+      const res = await fetch(`${API}/user/${currentUser?._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -118,7 +119,7 @@ function Account() {
   }
   try {
     dispatch(deleteUserStart());
-    const res = await fetch(`/api/user/${currentUser?._id}`,{
+    const res = await fetch(`${API}/user/${currentUser?._id}`,{
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"

@@ -6,6 +6,8 @@ function MyOrders() {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+      const API = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
 
   useEffect(() => {
     fetchUserOrders();
@@ -15,7 +17,7 @@ function MyOrders() {
     try {
       setLoading(true);
 
-      const res = await fetch("/api/orders/my-orders", {
+      const res = await fetch(`${API}/orders/my-orders`, {
         credentials: "include",
       });
 
