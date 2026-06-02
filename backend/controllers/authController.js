@@ -1,7 +1,7 @@
 import { catchAsync } from "../utils/catchAsync.js";
 import { errorHandler } from "../utils/errorHandler.js";
 import User from "../models/userModel.js";
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
