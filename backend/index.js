@@ -24,11 +24,11 @@ server.use(cors({
 
 
 // API ROUTES
-server.use('/api/auth', authRouter)
-server.use('/api/user', userRouter)
-server.use('/api/products', productRouter)
-server.use('/api/cart', cartRouter)
-server.use('/api/orders', orderRouter)
+server.use('/auth', authRouter)
+server.use('/user', userRouter)
+server.use('/products', productRouter)
+server.use('/cart', cartRouter)
+server.use('/orders', orderRouter)
 
 
 
