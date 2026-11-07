@@ -36,7 +36,6 @@ const orderSchema = new mongoose.Schema({
   },
 
   subtotal: Number,
-  shippingFee: Number,
   totalAmount: Number,
 
   orderStatus: {
